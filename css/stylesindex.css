@@ -1,9 +1,10 @@
 * {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
 }
+
 /* propiedade header*/
 header {
     background-color: #333;
@@ -97,15 +98,54 @@ nav ul li a {
 nav ul li a:hover {
     text-decoration: underline;
 }
-
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+.section {
+    margin-bottom: 40px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-position-x: center;
+    max-width: 800px; 
+    width: 100%;
+    text-align: center;
+}
+.section:first-child {
+    text-align: left;
+}
+.section h2 {
+    margin-bottom: 20px;
+    background-color: #8B4513;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+.section p {
+    margin-bottom: 10px;
+}
+.intro-content {
+    text-align: center;
+}
+.image-content img {
+    max-width: 100%;
+    height: auto;
+}
+/*
 main {
     flex: 1;
-    padding: 80px 20px 20px 20px; /* Asegura que el contenido no se oculte detrás del encabezado fijo */
+    padding: 80px 20px 20px 20px; /
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra todo el contenido verticalmente */
+    align-items: center; 
 }
-
+*/
 footer {
     text-align: center;
     padding: 20px 0;
@@ -115,33 +155,33 @@ footer {
     position: relative;
 }
 
-.section {
+/* .section {
     margin-bottom: 40px;
-    background-color: #fff; /* Color de fondo de las secciones */
-    padding: 40px; /* Espaciado interno de las secciones */
-    border-radius: 10px; /* Bordes redondeados para las secciones */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave para las secciones */
-    max-width: 800px; /* Ancho máximo de las secciones */
-    width: 100%; /* Asegura que las secciones ocupen todo el ancho disponible */
-    text-align: center; /* Alineación centrada del contenido */
+    background-color: #fff; /* Color de fondo de las secciones **
+    padding: 40px; /* Espaciado interno de las secciones **
+    border-radius: 10px; /* Bordes redondeados para las secciones **
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave para las secciones **
+    max-width: 800px; /* Ancho máximo de las secciones **
+    width: 100%; /* Asegura que las secciones ocupen todo el ancho disponible **
+    text-align: center; /* Alineación centrada del contenido **
 }
 
 .section:first-child {
-    text-align: left; /* Alineación izquierda para la primera sección (Inicio) */
+    text-align: left; /* Alineación izquierda para la primera sección (Inicio) **
 }
 
 .section h2 {
-    margin-bottom: 20px; /* Espacio entre el título y el contenido */
-    background-color: #8B4513; /* Color de fondo café para los encabezados */
-    color: white; /* Color de texto blanco para los encabezados */
-    padding: 10px; /* Espaciado interno de los encabezados */
-    border-radius: 5px; /* Bordes redondeados para los encabezados */
-    text-align: center; /* Alineación centrada del texto */
+    margin-bottom: 20px; /* Espacio entre el título y el contenido **
+    background-color: #8B4513; /* Color de fondo café para los encabezados **
+    color: white; /* Color de texto blanco para los encabezados **
+    padding: 10px; /* Espaciado interno de los encabezados **
+    border-radius: 5px; /* Bordes redondeados para los encabezados **
+    text-align: center; /* Alineación centrada del texto **
 }
 
 .section p {
-    margin-bottom: 10px; /* Espacio entre párrafos dentro de las secciones */
-}
+    margin-bottom: 10px; /* Espacio entre párrafos dentro de las secciones **
+} */
 
 .map-container {
     margin-bottom: 20px; /* Espacio entre el mapa y el contenido siguiente */
