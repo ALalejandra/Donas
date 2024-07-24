@@ -4,6 +4,61 @@
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
 }
+/* propiedade header*/
+header {
+    background-color: #333;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+
+.nav-item {
+    margin: 0 1rem;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-item a:hover {
+    color: #d3b152;
+    transform: scale(1.1);
+}
+
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header {
+    animation: fadeInDown 1s ease-in-out;
+}
+/* propiedade header FIN*/
 
 body {
     display: flex;
