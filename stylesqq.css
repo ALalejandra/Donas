@@ -1,0 +1,261 @@
+/* Estilos generales */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background: #f8f8f8;
+    color: #000000; /* Cambio de color de texto a negro para mejor legibilidad */
+    scroll-behavior: smooth;
+}
+
+header {
+    background: #683B09;
+    color: #f0f0f0;
+    padding: 10px 0;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    position: relative;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+nav ul li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+nav ul li:hover ul {
+    display: block;
+}
+
+nav ul li ul li {
+    padding: 10px;
+}
+
+nav ul li ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li ul li a:hover {
+    background: #555;
+}
+
+main {
+    flex: 1;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #683B09;
+    color: #fff;
+    width: 100%;
+    position: relative;
+}
+
+/* Estilos específicos para Uusuarios.php */
+
+.container {
+    max-width: 1000px; /* Aumentar el ancho máximo del contenedor */
+    margin: 20px auto; /* Centrar el contenedor horizontalmente */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Permitir desplazamiento horizontal si es necesario */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    border-collapse: collapse;
+    margin: 50px; /* Centrar la tabla horizontalmente */
+}
+
+table th,
+table td {
+    border: 1px solid #ccc;
+    padding: 24px; /* Aumentar el padding para mejor legibilidad */
+    text-align: left;
+}
+
+table th {
+    background-color: #683B09;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.success {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Estilos específicos para el formulario y mensajes de usuario */
+
+form {
+    width: 600px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centrar el formulario horizontalmente */
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    background-color: #683B09;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #522d07;
+}
+
+.success-message {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Estilos para productos en la confirmación de pago */
+
+#productosContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.producto-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(33.333% - 20px); /* Tres cajas por fila, flexibles */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar horizontalmente los elementos */
+    text-align: center; /* Centrar el texto */
+}
+
+.producto-item h4 {
+    margin: 10px 0; /* Separación superior e inferior */
+    font-size: 18px;
+}
+
+.producto-item p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.producto-item img {
+    width: 150px; /* Ajusta el ancho de la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin: 10px 0; /* Espacio alrededor de la imagen */
+    display: block; /* Asegura que la imagen se comporte como un bloque */
+    max-width: 100%; /* Asegura que la imagen no se salga del contenedor */
+}
+
+@media (max-width: 768px) {
+    .producto-item {
+        flex: 1 1 calc(50% - 20px); /* Dos cajas por fila en pantallas más pequeñas */
+    }
+    .container {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .producto-item {
+        flex: 1 1 100%; /* Una caja por fila en pantallas pequeñas */
+    }
+    .container {
+        padding: 5px;
+    }
+}

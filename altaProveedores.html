@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alta de Proveedores</title>
+    <link rel="stylesheet" href="stylesxx.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Menu1.html" class="active">Promociones</a></li>
+                <li>
+                    <a href="Productos.html">Productos</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Productos</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="altaProveedores.html">Proveedores</a>
+                    <ul>
+                        <li><a href="ConsultaProveedores.html">Consultar Proveedores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="altaUsuario.html">Adm</a>
+                    <ul>
+                        <li><a href="Usuarios.html">Consultar Adm</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Productos.html">Clientes</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Clientes</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Cierre de sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Alta de Proveedores</h1>
+        <form action="insertarProveedor.php" method="post">
+            <label for="nombre">Nombre del Proveedor:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ingresa el Nombre del proveedor" required>
+
+            <label for="contacto">Contacto del Proveedor:</label>
+            <input type="text" id="contacto" name="contacto" placeholder="Ingresa el contacto del proveedor" required>
+
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" placeholder="Ingresa el Usuario" required>
+
+            <label for="contras">Contraseña:</label>
+            <input type="password" id="contras" name="contras" placeholder="Ingresa la contraseña" required>
+
+            <label for="activo">Activo:</label>
+            <select id="activo" name="activo" required>
+                <option value="1">Sí</option>
+                <option value="0">No</option>
+            </select>
+
+            <input type="submit" value="Registrar Proveedor">
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy;2024 Last Bite. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.querySelector('.menu');
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('show');
+            });
+        });
+    </script>
+</body>
+</html>

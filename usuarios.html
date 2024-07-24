@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="stylesxx.css">
+</head>
+<body>
+
+    <header>
+
+        <nav>
+            <ul>
+                <li><a href="Menu1.html" class="active">Promociones</a></li>
+                <li>
+                    <a href="Productos.html">Productos</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Productos</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="altaProveedores.html">Proveedores</a>
+                    <ul>
+                        <li><a href="ConsultaProveedores.html">Consultar Proveedores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="altaUsuario.html">Adm</a>
+                    <ul>
+                        <li><a href="Usuarios.html">Consultar Adm</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Productos.html">Clientes</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Clientes</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Cierre de sesión</a></li>
+            </ul>
+        </nav>
+
+    </header>
+	     <main>
+
+
+    <h1>Usuarios</h1>
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar...">
+    </div>
+    <table id="usuariosTable" class="data-table">
+        <thead>
+            <tr>
+                <th>Id Usuario</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Correo</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Fecha de Ingreso</th>
+                <th>Activo</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se llenarán aquí dinámicamente -->
+        </tbody>
+    </table>
+		  </main>
+
+    <footer>
+        <p>&copy;2024 Last Bite. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Función para cargar los datos de usuarios
+            function loadUsuarios() {
+                fetch('getUsuarios.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.querySelector("#usuariosTable tbody");
+                        tableBody.innerHTML = '';
+
+                        data.forEach(usuario => {
+                            const row = document.createElement('tr');
+
+                            for (const key in usuario) {
+                                const cell = document.createElement('td');
+                                cell.textContent = usuario[key];
+                                row.appendChild(cell);
+                            }
+
+                            // Botón de editar
+                            const editCell = document.createElement('td');
+                            const editButton = document.createElement('button');
+                            editButton.textContent = 'Editar';
+                            editButton.className = 'btn-edit';
+                            editButton.onclick = () => editUsuario(usuario.IdUsu);
+                            editCell.appendChild(editButton);
+                            row.appendChild(editCell);
+
+                            // Botón de eliminar
+                            const deleteCell = document.createElement('td');
+                            const deleteButton = document.createElement('button');
+                            deleteButton.textContent = 'Eliminar';
+                            deleteButton.className = 'btn-delete';
+                            deleteButton.onclick = () => deleteUsuario(usuario.IdUsu);
+                            deleteCell.appendChild(deleteButton);
+                            row.appendChild(deleteCell);
+
+                            tableBody.appendChild(row);
+                        });
+                    });
+            }
+
+            // Función para buscar en la tabla
+            document.getElementById('searchInput').addEventListener('input', function() {
+                const filter = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#usuariosTable tbody tr');
+
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    let match = false;
+
+                    cells.forEach(cell => {
+                        if (cell.textContent.toLowerCase().includes(filter)) {
+                            match = true;
+                        }
+                    });
+
+                    row.style.display = match ? '' : 'none';
+                });
+            });
+
+            // Función para editar un usuario
+            function editUsuario(id) {
+                window.location.href = 'editUsuarioForm.html?id=' + id;
+            }
+
+            // Función para eliminar un usuario
+            function deleteUsuario(id) {
+                if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+                    fetch('deleteUsuario.php?id=' + id)
+                        .then(response => response.text())
+                        .then(data => {
+                            if (data === 'success') {
+                                loadUsuarios();
+                            } else {
+                                alert('Error al eliminar el usuario');
+                            }
+                        });
+                }
+            }
+
+            // Cargar los usuarios al cargar la página
+            loadUsuarios();
+        });
+    </script>
+</body>
+</html>

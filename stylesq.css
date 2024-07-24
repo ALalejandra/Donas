@@ -1,0 +1,455 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
+
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background: #f8f8f8;
+    color: #FFFFFF;
+    scroll-behavior: smooth;
+}
+
+
+
+header {
+    background: #683B09;
+    color: #f0f0f0;
+    padding: 10px 0;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    position: relative; /* Necesario para el submenú */
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+nav ul li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 200px;
+    z-index: 1000; /* Asegúrate de que el submenú se muestre por encima de otros elementos */
+}
+
+nav ul li:hover ul {
+    display: block;
+}
+
+nav ul li ul li {
+    padding: 10px;
+}
+
+nav ul li ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li ul li a:hover {
+    background: #555;
+}
+
+main {
+    flex: 1;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #683B09;
+    color: #fff;
+    width: 100%;
+    position: relative;
+}
+
+.carousel {
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
+    min-width: 100%;
+    display: none; /* Oculta todas las imágenes por defecto */
+}
+
+.carousel-item.active {
+    display: block; /* Muestra solo la imagen activa */
+}
+
+.carousel img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.search-container {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 80%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.flash-sale-container {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.flash-sale-btn {
+    padding: 10px 20px;
+    background-color: #FF6347;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.square-buttons-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.square-btn {
+    width: 100px;
+    height: 100px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+#productosContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.producto {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 15px;
+    width: calc(33.33% - 20px); /* Tres columnas con un margen entre ellas */
+    margin-bottom: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.producto h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+	    background-color: #000000;
+}
+
+.producto p {
+    font-size: 14px;
+    color: #555;
+}
+
+
+
+
+
+ .search-container {
+            display: none; /* Inicialmente oculto */
+            margin: 20px auto; /* Centrar horizontalmente */
+            text-align: center; /* Centrar contenido dentro del contenedor */
+        }
+        .search-container input {
+            width: 80%; /* Ajustar el tamaño del campo de búsqueda según sea necesario */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .producto {
+            margin-bottom: 20px;
+        }
+        .producto form {
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .producto button {
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+
+/* Estilos para los productos en el carrito */
+/* Estilos para el carrito */
+#carritoContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.col {
+    flex: 1 1 calc(33.333% - 1rem);
+    box-sizing: border-box;
+}
+
+.carrito-item {
+    background-color: #ffffff; /* Fondo blanco */
+    border: 1px solid #cccccc; /* Borde suave */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 20px; /* Espacio inferior entre los elementos */
+    text-align: center; /* Centrado del contenido */
+    transition: transform 0.3s ease; /* Transición suave al hacer hover */
+    color: #000000; /* Texto negro */
+    min-height: 400px; /* Altura mínima de la caja */
+   
+}
+
+.carrito-item h3 {
+    margin: 10px 0 5px; /* Margen superior 10px, inferior 5px */
+    font-size: 18px; /* Tamaño de fuente del título */
+}
+
+.carrito-item p {
+    margin: 5px 0; /* Margen superior e inferior de 5px */
+    font-size: 16px; /* Tamaño de fuente de los párrafos */
+}
+
+/* Contenedor flex para las columnas */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar las columnas horizontalmente */
+}
+
+/* Columnas individuales */
+.col {
+    width: calc(33.33% - 30px); /* Tres columnas con un margen entre ellas */
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Incluir padding y borde en el cálculo del ancho */
+    padding: 0 10px; /* Espacio interno en cada columna */
+}
+
+
+
+/* Estilos para el título del carrito */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 24px; /* Tamaño de fuente aumentado a 24px */
+    margin-bottom: 10px;
+    color: #000000; /* Texto negro */
+}
+
+.carrito-item img {
+    width: 100px; /* Ancho de 100 píxeles */
+    height: 200px; /* Alto de 200 píxeles */
+    display: block; /* Asegura que la imagen no tenga margen o padding extra */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+/* Botón de eliminar */
+form button {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+form button:hover {
+    background-color: #c9302c;
+}
+
+
+
+.producto img {
+    width: 100px; /* Ancho de 100 píxeles */
+    height: 200px; /* Alto de 200 píxeles */
+    display: block; /* Asegura que la imagen no tenga margen o padding extra */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+
+}
+
+
+.producto {
+    margin-bottom: 20px; /* Espacio entre productos */
+    text-align: center; /* Centra el contenido horizontalmente */
+}
+
+.producto form {
+    margin-top: 10px; /* Espacio arriba del formulario */
+}
+
+
+/* Consulta de medios para hacer los productos responsivos */
+@media (max-width: 1200px) {
+    .producto {
+        width: calc(50% - 20px); /* Dos columnas con un margen entre ellas */
+    }
+}
+
+@media (max-width: 768px) {
+    .producto {
+        width: calc(100% - 20px); /* Una columna */
+    }
+}
+
+
+/* Consultas de medios para hacer la página responsiva */
+@media (max-width: 1200px) {
+    .square-btn {
+        width: 80px;
+        height: 80px;
+    }
+
+    .flash-sale-btn {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    .carousel {
+        max-width: 100%;
+    }
+
+    .prev, .next {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .square-btn {
+        width: 70px;
+        height: 70px;
+    }
+
+    .flash-sale-btn {
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul li a {
+        font-size: 16px;
+    }
+
+    .carousel img {
+        height: auto;
+    }
+
+    .square-btn {
+        width: 60px;
+        height: 60px;
+    }
+
+    .flash-sale-btn {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .search-container input {
+        width: 90%;
+    }
+}
+
+

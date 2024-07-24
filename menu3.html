@@ -1,0 +1,126 @@
+<?php
+session_start();
+$nombreProveedor = isset($_SESSION["proveedor"]) ? $_SESSION["proveedor"] : "Nombre Proveedor";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu 1</title>
+    <link rel="stylesheet" href="stylesq.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><?php echo htmlspecialchars($nombreProveedor); ?></li> <!-- Mostrar el nombre del proveedor -->
+                <li><a href="Menu3.html" class="active">Promociones</a></li>
+                <li>
+                    <a href="PProductos.html">Productos</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Productos</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="altaProveedores.html">Proveedores</a>
+                    <ul>
+                        <li><a href="ConsultaProveedores.html">Consultar Proveedores</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Cierre de sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Carrusel de imágenes -->
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="Nito.Png" alt="Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="Donas.png" alt="Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="Game.png" alt="Image 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="Fames.png" alt="Image 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="Falletas.png" alt="Image 5">
+                </div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+
+        <!-- Caja de texto para buscar -->
+        <div class="search-container">
+            <input type="text" placeholder="Buscar...">
+        </div>
+
+        <!-- Botón de ventas flash -->
+        <div class="flash-sale-container">
+            <button class="flash-sale-btn">Ventas Flash</button>
+        </div>
+
+        <!-- Botones cuadrados -->
+        <div class="square-buttons-container">
+            <button class="square-btn">Galletas</button>
+            <button class="square-btn">Pan de caja</button>
+            <button class="square-btn">Gelatinas</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy;2024 Last Bite. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Script para resaltar el enlace activo y controlar el carrusel -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Obtener la lista de elementos del menú
+            var links = document.querySelectorAll("nav ul li a");
+
+            // Iterar sobre los enlaces y agregar el evento click
+            links.forEach(function(link) {
+                link.addEventListener("click", function() {
+                    // Eliminar la clase activa de todos los enlaces
+                    links.forEach(function(link) {
+                        link.classList.remove("active");
+                    });
+
+                    // Agregar la clase activa al enlace clicado
+                    this.classList.add("active");
+                });
+            });
+
+            // Inicializar el carrusel de imágenes
+            showSlides(slideIndex);
+        });
+
+        // Variables del carrusel
+        let slideIndex = 0;
+
+        // Función para mostrar la diapositiva actual
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("carousel-item");
+            if (n >= slides.length) { slideIndex = 0; }
+            if (n < 0) { slideIndex = slides.length - 1; }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex].style.display = "block";
+        }
+
+        // Función para cambiar de diapositiva
+        function plusSlides(n) {
+            slideIndex += n;
+            showSlides(slideIndex);
+        }
+    </script>
+</body>
+</html>

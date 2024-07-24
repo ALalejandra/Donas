@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <!--<ul>
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#historia">Historia</a></li>
+                <li><a href="index.html#ubicacion">Ubicación</a></li>
+                <li><a href="index.html#menu">Menú</a></li>
+                <li><a href="index.html#Objetivos">Objetivos</a></li>
+                <li><a href="index.html#Misión">Misión</a></li>
+                <li><a href="index.html#Visión">Visión</a></li>
+                <li><a href="log.html">Login</a></li>
+            </ul>-->
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="index.html#inicio">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#historia">Historia</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#ubicacion">Ubicación</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html#menu">Menú</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.html#Objetivos">Objetivos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.html#Misión">Misión</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.html#Visión">Visión</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="log.html">Login</a>
+                  </li>
+                
+              </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="Login" class="login-section">
+            <div class="container">
+                <div class="login-form">
+                    <h2>Iniciar Sesión</h2>
+                    <form id="loginForm" action="validalog.php" method="post">
+                        <label for="usuario">Usuario:</label>
+                        <input type="text" id="usuario" name="Usu" maxlength="20" placeholder="Ingresa usuario" required>
+                        
+                        <label for="password">Contraseña:</label>
+                        <div class="password-container">
+                            <input type="password" id="password" name="Contra" maxlength="20" placeholder="Ingresa contraseña" required>
+                            <button type="button" id="togglePassword" aria-label="Mostrar/Ocultar contraseña">
+                                <img src="ojo.png">
+                            </button>
+                        </div>
+                        
+                        <button type="submit">Ingresar</button>
+                    </form>
+                    <a href="/taq/Soynuevo.html" class="new-user">Soy nuevo</a>
+                </div>
+                <div class="image-container">
+                    <img src="Last.png" alt="Imagen de bienvenida">
+                </div>    
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Last Bite. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+
+    <!-- Script para mostrar alertas -->
+    <script>
+        // Función para obtener parámetros GET de la URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Mostrar alertas según los parámetros GET
+        document.addEventListener("DOMContentLoaded", function() {
+            var message = getParameterByName('message');
+            if (message) {
+                alert(message);
+            }
+        });
+    </script>
+</body>
+</html>

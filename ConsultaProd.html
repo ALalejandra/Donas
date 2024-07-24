@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Productos</title>
+    <link rel="stylesheet" href="stylesxx.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Menu1.html" class="active">Promociones</a></li>
+                <li>
+                    <a href="Productos.html">Productos</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Productos</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="altaProveedores.html">Proveedores</a>
+                    <ul>
+                        <li><a href="ConsultaProveedores.html">Consultar Proveedores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Usuarios.html">Adm</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Adm</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Productos.html">Clientes</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Clientes</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Cierre de sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Consulta de Productos</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar productos...">
+            <button id="downloadInventoryButton">Inventario</button>
+        </div>
+        <div class="search-container">
+            <button id="downloadExcelButton">Descargar Excel</button>
+            <label for="fileInput" id="fileInputLabel">Seleccionar archivo</label>
+            <input type="file" id="fileInput" accept=".xlsx, .xls">
+        </div>
+        <table id="productosTable">
+            <thead>
+                <tr>
+                    <th>ID Producto</th>
+                    <th>Nombre del Producto</th>
+                    <th>Código de Barras</th>
+                    <th>Fecha de Caducidad</th>
+                    <th>Costo</th>
+                    <th>Piezas</th>
+                    <th>Categoria</th>
+                    <th>Activo</th>
+                    <th>Proveedor</th>
+                    <th>Caducado</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos de los productos se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>&copy;2024 Last Bite. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function loadProductos() {
+                fetch('getProductos.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.querySelector("#productosTable tbody");
+                        tableBody.innerHTML = '';
+
+                        data.forEach(producto => {
+                            const row = document.createElement('tr');
+
+                            for (const key in producto) {
+                                const cell = document.createElement('td');
+                                cell.textContent = producto[key];
+                                cell.setAttribute('data-label', key);
+                                row.appendChild(cell);
+                            }
+
+                            // Agregar clase de estilo según el estado de caducidad
+                            if (producto.Caducado === 'Caducado') {
+                                row.classList.add('Caducado');
+                            } else if (producto.Activo === '0') {
+                                row.classList.add('Activo');
+                            }
+
+                            // Agregar botones de editar y eliminar
+                            const editCell = document.createElement('td');
+                            const editButton = document.createElement('button');
+                            editButton.textContent = 'Editar';
+                            editButton.className = 'btn-edit';
+                            editButton.onclick = () => editProducto(producto.IdProd);
+                            editCell.appendChild(editButton);
+                            row.appendChild(editCell);
+
+                            const deleteCell = document.createElement('td');
+                            const deleteButton = document.createElement('button');
+                            deleteButton.textContent = 'Eliminar';
+                            deleteButton.className = 'btn-delete';
+                            deleteButton.onclick = () => deleteProducto(producto.IdProd);
+							
+
+                            deleteCell.appendChild(deleteButton);
+                            row.appendChild(deleteCell);
+
+                            tableBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => console.error('Error al cargar productos:', error));
+            }
+
+            document.getElementById('searchInput').addEventListener('input', function() {
+                const filter = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#productosTable tbody tr');
+
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    let match = false;
+
+                    cells.forEach(cell => {
+                        if (cell.textContent.toLowerCase().includes(filter)) {
+                            match = true;
+                        }
+                    });
+
+                    row.style.display = match ? '' : 'none';
+                });
+            });
+
+            function editProducto(id) {
+                window.location.href = 'editProductoForm.html?id=' + id;
+            }
+
+            
+function deleteProducto(id) {
+    console.log('Intentando eliminar el producto con ID:', id); // Depuración
+
+    if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+        fetch('delete.php?id=' + id)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Producto eliminado correctamente');
+                    loadProductos(); // Recargar la lista de productos después de eliminar
+                } else {
+                    alert('Error al eliminar el producto: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error al eliminar el producto:', error);
+                alert('Error al eliminar el producto');
+            });
+    }
+}
+
+
+
+            document.getElementById('downloadExcelButton').addEventListener('click', function() {
+                downloadExcelTemplate();
+            });
+
+            document.getElementById('fileInput').addEventListener('change', function(event) {
+                handleFileUpload(event.target.files[0]);
+            });
+
+            document.getElementById('downloadInventoryButton').addEventListener('click', function() {
+                downloadInventory();
+            });
+
+            function downloadExcelTemplate() {
+                const ws = XLSX.utils.json_to_sheet([
+                    { "Nombre del Producto": "", "Código de Barras": "", "Fecha de Caducidad": "", "Costo": "", "Piezas": "", "Categoria": "", "Activo": "" }
+                ]);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'Plantilla');
+                XLSX.writeFile(wb, 'plantilla_productos.xlsx');
+            }
+
+            function handleFileUpload(file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const data = new Uint8Array(event.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const firstSheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheetName];
+        const json = XLSX.utils.sheet_to_json(worksheet);
+
+        const proveedorId = "<?php echo $_SESSION['usuario']; ?>";
+
+        json.forEach(producto => {
+            producto.IdProveedores = proveedorId;
+        });
+
+        fetch('uploadPProductos.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(json)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                loadProductos();
+                alert('Productos cargados correctamente.');
+            } else {
+                console.error('Error al cargar productos:', data.message);
+                if (data.producto) {
+                    console.error('Producto con error:', data.producto);
+                }
+                alert('Error al cargar productos: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error al procesar la solicitud:', error);
+            alert('Error al procesar la solicitud. Ver la consola para más detalles.');
+        });
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+            function downloadInventory() {
+                fetch('getProductos.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const ws = XLSX.utils.json_to_sheet(data);
+                        const wb = XLSX.utils.book_new();
+                        XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
+                        XLSX.writeFile(wb, 'inventario_productos.xlsx');
+                    });
+            }
+
+            loadProductos();
+
+        });
+    </script>
+</body>
+</html

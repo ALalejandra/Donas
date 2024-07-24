@@ -1,0 +1,20 @@
+<?php
+include 'cone.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
+    $idProveedor = $_GET['id'];
+
+    // Eliminar proveedor
+    $sql = "DELETE FROM proveedores WHERE IdProveedores = $idProveedor";
+
+    if ($conn->query($sql) === TRUE) {
+        // Redirigir a la página de consulta de proveedores después de la eliminación
+        header('Location: ConsultaPProveedores.html');
+        exit;
+    } else {
+        echo "Error al eliminar el proveedor: " . $conn->error;
+    }
+}
+
+$conn->close();
+?>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Proveedores</title>
+    <link rel="stylesheet" href="stylesxx.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Menu1.html" class="active">Promociones</a></li>
+                <li>
+                    <a href="Productos.html">Productos</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Productos</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="altaProveedores.html">Proveedores</a>
+                    <ul>
+                        <li><a href="ConsultaProveedores.html">Consultar Proveedores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="altaUsuario.html">Adm</a>
+                    <ul>
+                        <li><a href="Usuarios.html">Consultar Adm</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Productos.html">Clientes</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Clientes</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Cierre de sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Consulta de Proveedores</h1>
+        <table id="proveedoresTable">
+            <thead>
+                <tr>
+                    <th>ID Proveedor</th>
+                    <th>Nombre</th>
+                    <th>Contacto</th>
+                    <th>Usuario</th>
+                    <th>Activo</th>
+                    <th>Editar</th>
+                    <th>Activar/Desactivar</th>                  
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos de los proveedores se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>&copy;2024 Last Bite. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function loadProveedores() {
+                fetch('getProveedores.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.querySelector("#proveedoresTable tbody");
+                        tableBody.innerHTML = '';
+
+                        data.forEach(proveedor => {
+                            const row = document.createElement('tr');
+
+                            // Añadir las celdas de datos
+                            Object.keys(proveedor).forEach(key => {
+                                const cell = document.createElement('td');
+                                cell.textContent = proveedor[key];
+                                cell.setAttribute('data-label', key);
+                                row.appendChild(cell);
+                            });
+
+                            // Añadir botón de editar en celda separada
+                            const editCell = document.createElement('td');
+                            const editButton = document.createElement('button');
+                            editButton.textContent = 'Editar';
+                            editButton.classList.add('btn-edit');
+                            editButton.addEventListener('click', () => {
+                                window.location.href = `editarProveedor.php?id=${proveedor.IdProveedores}`;
+                            });
+                            editCell.appendChild(editButton);
+                            row.appendChild(editCell);
+
+                            // Añadir botón de activar/desactivar en celda separada
+                            const toggleCell = document.createElement('td');
+                            const toggleButton = document.createElement('button');
+                            toggleButton.textContent = proveedor.Activo ? 'Eliminar' : 'Activar';
+                            toggleButton.classList.add('btn-delete');
+                            if (proveedor.Activo) {
+                                toggleButton.style.backgroundColor = 'Red';
+                            } else {
+                                toggleButton.style.backgroundColor = 'red';
+                            }
+                            toggleButton.addEventListener('click', () => {
+                                toggleProveedor(proveedor.IdProveedores, proveedor.Activo);
+                            });
+                            toggleCell.appendChild(toggleButton);
+                            row.appendChild(toggleCell);
+
+                            // Añadir la fila a la tabla
+                            tableBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => console.error('Error al cargar proveedores:', error));
+            }
+
+            function toggleProveedor(idProveedor, estadoActual) {
+                const nuevoEstado = estadoActual === 4 ? 2 : 4; // Invertir el estado actual
+
+                fetch(`eliminarProveedor.php?id=${idProveedor}&activo=${nuevoEstado}`, {
+                    method: 'PUT'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cambiar el estado del proveedor.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert(data.message); // Muestra un mensaje de éxito
+                    loadProveedores(); // Vuelve a cargar la lista de proveedores
+                })
+                .catch(error => console.error('Error:', error));
+            }
+
+            loadProveedores();
+        });
+    </script>
+</body>
+</html>

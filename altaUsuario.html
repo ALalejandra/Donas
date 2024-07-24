@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alta de Usuario</title>
+    <link rel="stylesheet" href="stylesxx.css">
+</head>
+<header>
+    <nav>
+        <ul>
+            <li><a href="Menu1.html" class="active">Promociones</a></li>
+            <li>
+                <a href="Productos.html">Productos</a>
+                <ul>
+                    <li><a href="ConsultaProd.html">Consultar Productos</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="altaProveedores.html">Proveedores</a>
+                <ul>
+                    <li><a href="ConsultaProveedores.html">Consultar Proveedores</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="altaUsuario.html">Adm</a>
+                <ul>
+                    <li><a href="Usuarios.html">Consultar Adm</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="Productos.html">Clientes</a>
+                <ul>
+                    <li><a href="ConsultaProd.html">Consultar Clientes</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Cierre de sesión</a></li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+
+<main>
+    <h1>Alta de Usuario</h1>
+    <form id="altaForm" method="POST" action="altaUsuario.php" class="form-container">
+        <div>
+            <label for="Usu">Usuario:</label>
+            <input type="text" id="Usu" name="Usu" placeholder="Ingresa el Nombre del Usuario" required>
+        </div>
+        <div>
+            <label for="Contra">Contraseña:</label>
+            <input type="password" id="Contra" name="Contra" placeholder="Ingresa la contraseña" required>
+        </div>
+        <div>
+            <label for="Nombre">Nombre:</label>
+            <input type="text" id="Nombre" name="Nombre" placeholder="Ingresa el Nombre" required>
+        </div>
+        <div>
+            <label for="App">Apellido Paterno:</label>
+            <input type="text" id="App" name="App" placeholder="Ingresa el Apellido paterno" required>
+        </div>
+        <div>
+            <label for="Apm">Apellido Materno:</label>
+            <input type="text" id="Apm" name="Apm" placeholder="Ingresa el Apellido materno " required>
+        </div>
+        <div>
+            <label for="Correo">Correo:</label>
+            <input type="email" id="Correo" name="Correo" placeholder="Ingresa el Corre" required>
+        </div>
+        <div>
+            <label for="FecNam">Fecha de Nacimiento:</label>
+            <input type="date" id="FecNam" name="FecNam" required>
+        </div>
+        <div>
+            <label for="Activo">Activo:</label>
+            <select id="Activo" name="Activo" required>
+                <option value="2">Sí</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+        <button type="submit">Guardar Usuario</button>
+    </form>
+</main>
+<footer>
+    <p>&copy;2024 Last Bite. Todos los derechos reservados.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    document.getElementById('altaForm').addEventListener('submit', function(event) {
+        // Prevenir el envío del formulario para calcular el hash MD5
+        event.preventDefault();
+
+        const passwordField = document.getElementById('Contra');
+        if (passwordField.value) {
+            // Calcular el hash MD5
+            const hashedPassword = CryptoJS.MD5(passwordField.value).toString();
+            passwordField.value = hashedPassword;
+        }
+
+        // Ahora enviar el formulario
+        this.submit();
+    });
+</script>
+</body>
+</html>
