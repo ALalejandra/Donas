@@ -15,11 +15,12 @@ $usuario = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : "Nombre Proveedo
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promociones</title>
     <link rel="stylesheet" href="stylesq.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <header>
         <nav>
-            <ul>
+            <!-- <ul>
                 <li><a href="Menu1.html" class="active">Promociones</a></li>
                 <li>
                     <a href="Productos.html">Productos</a>
@@ -46,6 +47,39 @@ $usuario = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : "Nombre Proveedo
                     </ul>
                 </li>
                 <li><a href="#">Cierre de sesión</a></li>
+            </ul> -->
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <li><a class="nav-link active" aria-current="page" href="Menu1.html" class="active">Promociones</a></li>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="Productos.html">Productos</a>
+                  <ul>
+                    <li><a href="ConsultaProd.html">Consultar Productos</a></li>
+                </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="altaProveedores.html">Proveedores</a>
+                  <ul>
+                    <li><a href="ConsultaProveedores.html">Consultar Proveedores</a></li>
+                </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="altaUsuario.html">Adm</a>
+                  <ul>
+                    <li><a href="Usuario.html">Consultar Adm</a></li>
+                </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Productos.html">Clientes</a>
+                    <ul>
+                        <li><a href="ConsultaProd.html">Consultar Clientes</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="">Cierre de sesión</a>
+                  </li>
+                
             </ul>
         </nav>
     </header>
@@ -53,8 +87,8 @@ $usuario = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : "Nombre Proveedo
         <!-- Carrusel de imágenes -->
         <div class="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="Nito.Png" alt="Image 1">
+                <div class="carousel-item">
+                    <img src="assets/espolvoreadas.png" alt="Image 1" >
                 </div>
                 <div class="carousel-item">
                     <img src="Donas.png" alt="Image 2">
